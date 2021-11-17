@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %} Recipe Cards {% endblock %}
+{% block href %} href="../static/css/recipe4.css"{% endblock %}
+{% block main %}
+{% for key, recipe in recipeDict.items() %}
+    {% if loop.index0%4==0 %}
+<div class="pageSize">
+    {% endif %}
+    {% if loop.index0%2==0 %}
+        <div class="cardRow{{ (loop.index0//2) + 1 }}">
+        {% endif %}
+            <div class="cardSize cardColumn{{ (loop.index0 % 2) + 1 }}">
+                <p class="fs22">{{key}}</p>
+                <p class="fs12Green">Dish Type: {{ recipe['dish type']}}</p>
+                <p class="fs12">Prep Time: {{ recipe['Prep Time']}}</p>
+                <p class="fs12">Ingredients:
+                    {% for ing, amt in recipe['Ingredients'].items() %}
+                         {{ ing }} - {{ amt }} &nbsp &nbsp
+                    {% endfor %}
+                </p>
+            </div>
+    {% if loop.index0%2==1 %}
+        </div>
+    {% endif %}
+
+ {% if loop.index0%4==3 %}
+</div>
+
+    {% endif %}
+ {% endfor %}
+{% endblock %}
